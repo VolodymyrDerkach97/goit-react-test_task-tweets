@@ -3,7 +3,7 @@ import Layout from "../Layout/Layout";
 import Home from "../../page/Home";
 import Tweets from "../../page/Tweets";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { fetchUsers } from "redux/operations";
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
   return (
     <>
       <Routes>

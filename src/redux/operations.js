@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchUsersApi, loadMoreApi } from "service/usersApi";
+import {
+  changeFollowersApi,
+  fetchUsersApi,
+  loadMoreApi,
+} from "service/usersApi";
 import { toast } from "react-toastify";
 
 export const fetchUsers = createAsyncThunk(
@@ -11,7 +15,7 @@ export const fetchUsers = createAsyncThunk(
         success: "Tweets loaded 👌",
         error: `Error🤯`,
       });
-      console.log(res);
+
       return res.data;
     } catch (error) {
       toast.error(error.message);
@@ -29,7 +33,7 @@ export const loadMoreUsers = createAsyncThunk(
         success: "Tweets loaded 👌",
         error: `Error🤯`,
       });
-      console.log(res);
+
       return res.data;
     } catch (error) {
       toast.error(error.message);
@@ -37,13 +41,16 @@ export const loadMoreUsers = createAsyncThunk(
     }
   }
 );
-// export const togleFollowing = createAsyncThunk(
-//   "users/togleFollowing",
-//   async (id, thunkApi) => {
-//     const state = thunkApi.getState();
-//     console.log("createAsyncThunk", state);
-//     console.log("id", id);
-//     const res = state.tweets.items.filte((item) => item.id === id);
-//     console.log("res", res);
+// export const changeCountFollowers = createAsyncThunk(
+//   "users/changeCountFollowers",
+//   async (data, thunkApi) => {
+//     try {
+//       console.log(data);
+//       const res = await changeFollowersApi(data);
+//       return res.data;
+//     } catch (error) {
+//       toast.error(error.message);
+//       return thunkApi.rejectWithValue(error.message);
+//     }
 //   }
 // );

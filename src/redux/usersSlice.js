@@ -1,27 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUsers, loadMoreUsers } from "./operations";
-
+import {
+  changeCountFollowers,
+  fetchUsers,
+  incrementFollowers,
+  loadMoreUsers,
+} from "./operations";
 const initialState = {
   items: [],
   isFollowing: [],
   isLoading: false,
   error: null,
 };
-
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
     addFollowing(state, action) {
-      console.log("state", state.isFollowing);
-      state.isFollowing.map((item) => {
-        if (item.id === action.payload) {
-          const index = state.findIndex((task) => task.id === action.payload);
-          return state.splice(index, 1);
-        } else {
-          return state.isFollowing.push(action.payload);
-        }
-      });
+      state.isFollowing.push(action.payload);
+    },
+    deleteFollowing(state, action) {
+      const index = state.isFollowing.findIndex((id) => id === action.payload);
+      if (index !== -1) {
+        state.isFollowing.splice(index, 1);
+      }
     },
   },
   extraReducers: (builder) => {
@@ -51,4 +52,5 @@ export const usersSlice = createSlice({
       });
   },
 });
-export const { addFollowing } = usersSlice.actions;
+export const { addFollowing, deleteFollowing } = usersSlice.actions;
+export default usersSlice.reducer;

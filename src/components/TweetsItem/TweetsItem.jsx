@@ -1,17 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ActicleStyled } from "./Tweets.style";
-import { useDispatch } from "react-redux";
-import { addFollowing, togleFollowingAction } from "redux/usersSlice";
-import { togleFollowing } from "redux/operations";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addFollowing, deleteFollowing } from "redux/usersSlice";
+import { selectIsFollowing } from "redux/selectors";
+import { changeCountFollowers, incrementFollowers } from "redux/operations";
 const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
-  const [isFollowing, setFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(followers);
-  const [isFollowingUsers, setIsFollowingUsers] = useState([]);
+
+  const isFoll = useSelector(selectIsFollowing);
+
+  const isFollowing = isFoll.includes(id);
 
   const dispatch = useDispatch();
-  const hadnldeFollowing = () => {
-    dispatch(addFollowing(id));
+  const handleFollowing = () => {
+    if (isFollowing) {
+      dispatch(deleteFollowing(id));
+      setFollowersCount(followersCount - 1);
+
+      console.log("відняв");
+    } else {
+      dispatch(addFollowing(id));
+      setFollowersCount(followersCount + 1);
+
+      console.log("добавив");
+    }
   };
   return (
     <ActicleStyled
@@ -23,36 +35,10 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
       <p>followersCount: {followersCount}</p>
       <p>{tweets} TWEETS</p>
       <p>{followersCount} FOLLOWERS</p>
-      <button onClick={hadnldeFollowing}>
+      <button onClick={handleFollowing}>
         {isFollowing ? "FOLLOWING" : "FOLLOW"}
       </button>
     </ActicleStyled>
   );
 };
-
 export default TweetsItem;
-// toggleCompleted(state, action) {
-//     for (const task of state) {
-//       if (task.id === action.payload) {
-//         task.completed = !task.completed;
-//         break;
-//       }
-//     }
-// export function addToFavorites(event) {
-//     const btn = event.target.closest('.news-card__favorite-button');
-//     const newsId = btn.dataset.newsId;
-//     const favoriteList = JSON.parse(localStorage.getItem('favoriteList')) || [];
-//     const favoriteIndex = favoriteList.findIndex(
-//       favorite => favorite.title === newsId
-//     );
-//     const bool = favoriteIndex === -1;
-//     if (bool) {
-//       const currentNews = currentNewsPage.find(news => news.title === newsId);
-//       favoriteList.push(currentNews);
-//     } else {
-//       favoriteList.splice(favoriteIndex, 1);
-//     }
-//     localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
-//     btn.textContent = bool ? 'Remove from favorite' : 'Add to favorite';
-//     createIcon(bool, btn);
-//   }

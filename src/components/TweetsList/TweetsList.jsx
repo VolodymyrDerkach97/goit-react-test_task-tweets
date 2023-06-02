@@ -1,10 +1,10 @@
 import TweetsItem from "components/TweetsItem/TweetsItem";
+
 import { useSelector } from "react-redux";
 import { selectUsers } from "redux/selectors";
 
 const TweetsList = () => {
   const tweets = useSelector(selectUsers);
-  const tweetsLocalStorage = localStorage.getItem("isFollowing");
 
   return (
     <>
