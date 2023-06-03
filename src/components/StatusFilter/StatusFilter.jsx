@@ -3,33 +3,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { statusFilters } from "redux/constants";
 import { selectStatusFilter } from "redux/selectors";
 import { setStatusFilter } from "redux/filtersSlice";
+import {
+  OptionStyled,
+  SelectStyled,
+  SelectWrapperStyled,
+} from "./StatusFilter.styled";
 
 export const StatusFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectStatusFilter);
 
-  const handleFilterChange = (filter) => dispatch(setStatusFilter(filter));
+  const handleFilterChange = (event) => {
+    const selectedFilter = event.target.value;
+    console.log(selectedFilter);
+    dispatch(setStatusFilter(selectedFilter));
+  };
 
   return (
-    <div>
-      <button
-        selected={filter === statusFilters.all}
-        onClick={() => handleFilterChange(statusFilters.all)}
-      >
-        All
-      </button>
-      <button
-        selected={filter === statusFilters.follow}
-        onClick={() => handleFilterChange(statusFilters.follow)}
-      >
-        follow
-      </button>
-      <button
-        selected={filter === statusFilters.following}
-        onClick={() => handleFilterChange(statusFilters.following)}
-      >
-        following
-      </button>
-    </div>
+    <SelectWrapperStyled>
+      <SelectStyled value={filter} onChange={handleFilterChange}>
+        <OptionStyled value={statusFilters.all}>All</OptionStyled>
+        <OptionStyled value={statusFilters.follow}>Follow</OptionStyled>
+        <OptionStyled value={statusFilters.following}>Following</OptionStyled>
+      </SelectStyled>
+    </SelectWrapperStyled>
   );
 };

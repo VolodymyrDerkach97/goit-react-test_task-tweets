@@ -5,11 +5,17 @@ import { changeCountFollowers } from "redux/operations";
 
 import {
   ActicleStyled,
+  CountFollowingStyled,
+  CountTweetsStyled,
+  IconGoItStyled,
   ImgWrapperStyled,
   StyledCircle,
   TweetsDataWrapperStyled,
 } from "./TweetsItem.styled";
-import defImg from "images/picture.png";
+import ButtonFollow from "components/Button/ButtonTweets";
+
+import defImg from "media/images/picture.png";
+import iconGoIT from "media/icon/Vector.svg";
 
 const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
   const dispatch = useDispatch();
@@ -33,7 +39,13 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
   return (
     <ActicleStyled>
       <ImgWrapperStyled>
-        <img src="" alt="" />
+        <IconGoItStyled
+          src={iconGoIT}
+          alt=""
+          width={76}
+          height={22}
+          style={{ fill: "red" }}
+        />
         <img src={defImg} alt="" width={308} height={168} />
       </ImgWrapperStyled>
       <TweetsDataWrapperStyled>
@@ -41,11 +53,9 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
           <img src={avatar} alt={user} width="80" height="80" />
         </StyledCircle>
 
-        <p>{tweets} TWEETS</p>
-        <p>{formattedNumber} FOLLOWERS</p>
-        <button onClick={handleFollowing}>
-          {isFollowing ? "FOLLOWING" : "FOLLOW"}
-        </button>
+        <CountTweetsStyled>{tweets} TWEETS</CountTweetsStyled>
+        <CountFollowingStyled>{formattedNumber} FOLLOWERS</CountFollowingStyled>
+        <ButtonFollow isFollowing={isFollowing} onClick={handleFollowing} />
       </TweetsDataWrapperStyled>
     </ActicleStyled>
   );

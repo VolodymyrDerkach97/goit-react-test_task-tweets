@@ -1,10 +1,14 @@
+import BackLink from "components/BackLink/BackLink";
+import ButtonLoadMore from "components/Button/ButtonLoadMore";
 import { StatusFilter } from "components/StatusFilter/StatusFilter";
 import TweetsList from "components/TweetsList/TweetsList";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, loadMoreUsers } from "redux/operations";
+import { useLocation } from "react-router-dom";
+import { loadMoreUsers } from "redux/operations";
 import { selectUsers } from "redux/selectors";
 import { fetchAllUsersApi } from "service/usersApi";
+import { OptionsPageWrapper } from "./Tweets.styled";
 
 const Tweets = () => {
   const [page, setPage] = useState(2);
@@ -12,6 +16,9 @@ const Tweets = () => {
 
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
+
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,11 +39,20 @@ const Tweets = () => {
 
   return (
     <>
-      <h2>Tweets</h2>
-      <StatusFilter />
+      <OptionsPageWrapper>
+        <BackLink to={backLink.current}>Go back</BackLink>
+        <StatusFilter />
+      </OptionsPageWrapper>
+
+      {/* <IconContext.Provider value={{ size: '25px' }}>
+        <BackLink to={backLink.current}>
+          {<IoIosArrowRoundBack />}Go back
+        </BackLink>
+      </IconContext.Provider> */}
       <TweetsList />
       {totalUsersApi > users.length && (
-        <button onClick={onLoadMore}>Load more</button>
+        <ButtonLoadMore onLoadMore={onLoadMore} />
+        // <button onClick={onLoadMore}>Load more</button>
       )}
     </>
   );

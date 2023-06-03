@@ -18,13 +18,14 @@ export const ActicleStyled = styled.article`
   border-radius: 20px;
   color: #ebd8ff;
 `;
+
 export const ImgWrapperStyled = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
 
-  margin-top: 28px;
+  padding-top: 28px;
   padding-bottom: 18px;
 
   &::after {
@@ -40,10 +41,22 @@ export const ImgWrapperStyled = styled.div`
       inset 0px 3.43693px 2.5777px #fbf8ff;
   }
 `;
-export const TweetsDataWrapperStyled = styled.div``;
-export const UserImgStyled = styled.img``;
-export const StyledCircle = styled.div`
+export const IconGoItStyled = styled.img`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+`;
+export const TweetsDataWrapperStyled = styled.div`
   position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const StyledCircle = styled.div`
+  position: absolute;
+  top: -43px;
   width: 80px;
   height: 80px;
   overflow: hidden;
@@ -54,6 +67,9 @@ export const StyledCircle = styled.div`
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
+      inset 0px -2.19582px 4.39163px #ae7be3,
+      inset 0px 4.39163px 3.29372px #fbf8ff;
   }
 
   ::after {
@@ -68,8 +84,15 @@ export const StyledCircle = styled.div`
     border-radius: 50%;
     box-sizing: border-box;
     pointer-events: none;
-    box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
-      inset 0px -2.19582px 4.39163px #ae7be3,
-      inset 0px 4.39163px 3.29372px #fbf8ff;
   }
+`;
+
+export const CountTweetsStyled = styled.p`
+  margin-top: 62px;
+  margin-bottom: 16px;
+`;
+
+export const CountFollowingStyled = styled.p`
+  margin-top: 0;
+  margin-bottom: 26px;
 `;
