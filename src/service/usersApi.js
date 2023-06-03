@@ -10,6 +10,17 @@ export const fetchUsersApi = async (page) => {
     console.log(error.message);
   }
 };
+
+export const fetchAllUsersApi = async (page) => {
+  try {
+    const res = await axios.get();
+
+    return res;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const loadMoreApi = async (page) => {
   try {
     const res = await axios.get(`?limit=3&page=${page}`);
@@ -19,13 +30,13 @@ export const loadMoreApi = async (page) => {
     console.log(error.message);
   }
 };
-// export const changeFollowersApi = async ({ id, ...data }) => {
-//   console.log(data);
-//   try {
-//     const res = await axios.put(`/${id}`, data);
 
-//     return res;
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
+export const changeFollowersApi = async ({ id, ...data }) => {
+  try {
+    const res = await axios.put(`/${id}`, data);
+
+    return res;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

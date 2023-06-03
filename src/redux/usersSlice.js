@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  changeCountFollowers,
-  fetchUsers,
-  incrementFollowers,
-  loadMoreUsers,
-} from "./operations";
+import { changeCountFollowers, fetchUsers, loadMoreUsers } from "./operations";
 const initialState = {
   items: [],
   isFollowing: [],
@@ -42,11 +37,26 @@ export const usersSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loadMoreUsers.fulfilled, (state, action) => {
-        console.log("loadMoreUsers:", action.payload);
         state.isLoading = false;
         state.items = [...state.items, ...action.payload];
       })
       .addCase(loadMoreUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(changeCountFollowers.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changeCountFollowers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items.map((user) => {
+          if (user.id === action.payload.id) {
+            return (user = action.payload);
+          }
+          return user;
+        });
+      })
+      .addCase(changeCountFollowers.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

@@ -1,11 +1,10 @@
 import TweetsItem from "components/TweetsItem/TweetsItem";
 
 import { useSelector } from "react-redux";
-import { selectUsers } from "redux/selectors";
+import { selectVisibleTweets } from "redux/selectors";
 
 const TweetsList = () => {
-  const tweets = useSelector(selectUsers);
-
+  const tweets = useSelector(selectVisibleTweets);
   return (
     <>
       <div>TweetsList</div>

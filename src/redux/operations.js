@@ -7,7 +7,7 @@ import {
 import { toast } from "react-toastify";
 
 export const fetchUsers = createAsyncThunk(
-  "users/fetchAll",
+  "users/fetchUsers",
   async (_, thunkApi) => {
     try {
       const res = await toast.promise(fetchUsersApi(), {
@@ -41,16 +41,15 @@ export const loadMoreUsers = createAsyncThunk(
     }
   }
 );
-// export const changeCountFollowers = createAsyncThunk(
-//   "users/changeCountFollowers",
-//   async (data, thunkApi) => {
-//     try {
-//       console.log(data);
-//       const res = await changeFollowersApi(data);
-//       return res.data;
-//     } catch (error) {
-//       toast.error(error.message);
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const changeCountFollowers = createAsyncThunk(
+  "users/changeCountFollowers",
+  async (data, thunkApi) => {
+    try {
+      const res = await changeFollowersApi(data);
+      return res.data;
+    } catch (error) {
+      toast.error(error.message);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

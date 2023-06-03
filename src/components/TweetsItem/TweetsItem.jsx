@@ -1,43 +1,52 @@
-import { useState } from "react";
-import { ActicleStyled } from "./Tweets.style";
 import { useDispatch, useSelector } from "react-redux";
 import { addFollowing, deleteFollowing } from "redux/usersSlice";
 import { selectIsFollowing } from "redux/selectors";
-import { changeCountFollowers, incrementFollowers } from "redux/operations";
+import { changeCountFollowers } from "redux/operations";
+
+import {
+  ActicleStyled,
+  ImgWrapperStyled,
+  StyledCircle,
+  TweetsDataWrapperStyled,
+} from "./TweetsItem.styled";
+import defImg from "images/picture.png";
+
 const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
-  const [followersCount, setFollowersCount] = useState(followers);
-
-  const isFoll = useSelector(selectIsFollowing);
-
-  const isFollowing = isFoll.includes(id);
-
   const dispatch = useDispatch();
+
+  const isFollowingArray = useSelector(selectIsFollowing);
+  const isFollowing = isFollowingArray.includes(id);
+
   const handleFollowing = () => {
     if (isFollowing) {
       dispatch(deleteFollowing(id));
-      setFollowersCount(followersCount - 1);
-
-      console.log("відняв");
+      dispatch(changeCountFollowers({ id, followers: followers - 1 }));
     } else {
       dispatch(addFollowing(id));
-      setFollowersCount(followersCount + 1);
-
-      console.log("добавив");
+      dispatch(changeCountFollowers({ id, followers: followers + 1 }));
     }
   };
+  const formattedNumber = followers
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
   return (
-    <ActicleStyled
-      style={{ outline: "1px solid red", width: "380px", height: "460px" }}
-    >
-      <img src="" alt="" />
-      <img src="" alt="" />
-      <img src={avatar} alt={user} width="100" height="120" />
-      <p>followersCount: {followersCount}</p>
-      <p>{tweets} TWEETS</p>
-      <p>{followersCount} FOLLOWERS</p>
-      <button onClick={handleFollowing}>
-        {isFollowing ? "FOLLOWING" : "FOLLOW"}
-      </button>
+    <ActicleStyled>
+      <ImgWrapperStyled>
+        <img src="" alt="" />
+        <img src={defImg} alt="" width={308} height={168} />
+      </ImgWrapperStyled>
+      <TweetsDataWrapperStyled>
+        <StyledCircle>
+          <img src={avatar} alt={user} width="80" height="80" />
+        </StyledCircle>
+
+        <p>{tweets} TWEETS</p>
+        <p>{formattedNumber} FOLLOWERS</p>
+        <button onClick={handleFollowing}>
+          {isFollowing ? "FOLLOWING" : "FOLLOW"}
+        </button>
+      </TweetsDataWrapperStyled>
     </ActicleStyled>
   );
 };

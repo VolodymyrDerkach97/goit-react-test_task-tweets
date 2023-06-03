@@ -11,15 +11,18 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import usersSlice from "./usersSlice";
+import { filtersReducer } from "./filtersSlice";
+
 const authPersistConfig = {
   key: "following",
   storage,
   whitelist: ["isFollowing"],
 };
+
 export const store = configureStore({
   reducer: {
     tweets: persistReducer(authPersistConfig, usersSlice),
-    filter: null,
+    filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
