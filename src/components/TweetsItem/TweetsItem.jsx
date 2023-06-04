@@ -15,7 +15,7 @@ import {
   ImgWrapperStyled,
   TweetsDataWrapperStyled,
 } from "./TweetsItem.styled";
-import ButtonFollow from "components/Button/ButtonTweets";
+import { ButtonFollow } from "components/Buttons";
 
 import defImg from "media/images/picture.png";
 import iconGoIT from "media/icon/Vector.svg";

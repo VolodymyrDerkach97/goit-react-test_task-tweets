@@ -21,5 +21,5 @@ BackLink.propTypes = {
       search: PropTypes.string,
     }),
   }),
-  children: PropTypes.string,
+  children: PropTypes.array,
 };

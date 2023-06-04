@@ -48,5 +48,6 @@ export const usersSlice = createSlice({
       });
   },
 });
-export const { addFollowing, deleteFollowing } = usersSlice.actions;
+export const { addFollowing, deleteFollowing, clearUsersState } =
+  usersSlice.actions;
 export default usersSlice.reducer;
