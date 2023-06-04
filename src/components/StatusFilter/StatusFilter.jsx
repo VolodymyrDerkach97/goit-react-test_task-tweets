@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { statusFilters } from "redux/constants";
 import { selectStatusFilter } from "redux/selectors";
-import { setStatusFilter } from "redux/filtersSlice";
+import { setStatusFilter } from "redux/filters/filtersSlice";
 import {
   OptionStyled,
   SelectStyled,

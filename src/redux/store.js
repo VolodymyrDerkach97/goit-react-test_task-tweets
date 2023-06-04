@@ -10,8 +10,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import usersSlice from "./usersSlice";
-import { filtersReducer } from "./filtersSlice";
+import usersSlice from "./users/usersSlice";
+import { filtersReducer } from "./filters/filtersSlice";
 
 const authPersistConfig = {
   key: "following",

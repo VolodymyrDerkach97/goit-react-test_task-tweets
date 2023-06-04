@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
+
 import { useDispatch, useSelector } from "react-redux";
-import { addFollowing, deleteFollowing } from "redux/usersSlice";
+import { addFollowing, deleteFollowing } from "redux/users/usersSlice";
 import { selectIsFollowing } from "redux/selectors";
 import { changeCountFollowers } from "redux/operations";
 
@@ -63,3 +65,11 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
   );
 };
 export default TweetsItem;
+
+TweetsItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  user: PropTypes.string,
+  avatar: PropTypes.string,
+  tweets: PropTypes.number,
+  followers: PropTypes.number,
+};

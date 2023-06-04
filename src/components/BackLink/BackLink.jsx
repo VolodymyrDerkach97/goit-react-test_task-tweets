@@ -1,24 +1,25 @@
-// import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import { BackLinkStyled } from "./BackLink.styled";
 
 const BackLink = ({ to, children }) => {
-  return <Link to={to}>{children}</Link>;
+  return <BackLinkStyled to={to}>{children}</BackLinkStyled>;
 };
 
 export default BackLink;
 
-// BackLink.propTypes = {
-//   to: PropTypes.shape({
-//     hash: PropTypes.string,
-//     key: PropTypes.string,
-//     pathname: PropTypes.string,
-//     search: PropTypes.string,
-//     state: PropTypes.shape({
-//       hash: PropTypes.string,
-//       key: PropTypes.string,
-//       pathname: PropTypes.string,
-//       search: PropTypes.string,
-//     }),
-//   }),
-//   children: PropTypes.array,
-// };
+BackLink.propTypes = {
+  to: PropTypes.shape({
+    hash: PropTypes.string,
+    key: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+    state: PropTypes.shape({
+      hash: PropTypes.string,
+      key: PropTypes.string,
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+    }),
+  }),
+  children: PropTypes.string,
+};

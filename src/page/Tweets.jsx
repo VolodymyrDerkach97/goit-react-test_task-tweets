@@ -11,6 +11,9 @@ import ButtonLoadMore from "components/Button/ButtonLoadMore";
 import { StatusFilter } from "components/StatusFilter/StatusFilter";
 import TweetsList from "components/TweetsList/TweetsList";
 
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { IconContext } from "react-icons";
+
 const Tweets = () => {
   const [page, setPage] = useState(1);
   const [totalUsersApi, settTotalUsersApi] = useState(0);
@@ -20,6 +23,10 @@ const Tweets = () => {
 
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? "/");
+
+  useEffect(() => {
+    document.title = "Tweets";
+  }, []);
 
   useEffect(() => {
     dispatch(fetchUsers(page));
@@ -44,15 +51,14 @@ const Tweets = () => {
   return (
     <>
       <OptionsPageWrapper>
-        <BackLink to={backLink.current}>Go back</BackLink>
+        <IconContext.Provider value={{ size: "25px" }}>
+          <BackLink to={backLink.current}>
+            {<IoIosArrowRoundBack />}Go back
+          </BackLink>
+        </IconContext.Provider>
         <StatusFilter />
       </OptionsPageWrapper>
 
-      {/* <IconContext.Provider value={{ size: '25px' }}>
-        <BackLink to={backLink.current}>
-          {<IoIosArrowRoundBack />}Go back
-        </BackLink>
-      </IconContext.Provider> */}
       <TweetsList />
       <ButtonWrapperStyled>
         {totalUsersApi > users.length && (

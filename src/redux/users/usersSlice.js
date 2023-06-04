@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { changeCountFollowers, fetchUsers } from "./operations";
+import { changeCountFollowers, fetchUsers } from "../operations";
 const initialState = {
   items: [],
   isFollowing: [],
