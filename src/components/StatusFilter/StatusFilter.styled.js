@@ -18,10 +18,17 @@ export const SelectStyled = styled.select`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 16px;
+  @media screen and (min-width: 390px) {
+    font-size: 20px;
+  }
 `;
 
 export const OptionStyled = styled.option`
   background-color: #8a5de9;
   color: #ffffff;
+  font-size: 16px;
+  @media screen and (min-width: 390px) {
+    font-size: 20px;
+  }
 `;
