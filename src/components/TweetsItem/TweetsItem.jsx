@@ -11,9 +11,6 @@ import {
   CountTweetsStyled,
   IconGoItStyled,
   ImgWrapperStyled,
-  StyledAvatar,
-  StyledCircle,
-  StyledWrapper,
   TweetsDataWrapperStyled,
 } from "./TweetsItem.styled";
 import ButtonFollow from "components/Button/ButtonTweets";
