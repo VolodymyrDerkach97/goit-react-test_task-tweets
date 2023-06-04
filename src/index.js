@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/goit-react-test_task-tweets">
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
