@@ -12,3 +12,6 @@ export const HeaderStyled = styled.header`
   color: white;
   box-shadow: 0px 3px 5px 0px rgba(150, 35, 245, 1);
 `;
+export const MainStyled = styled.main`
+  padding: 0 15px;
+`;

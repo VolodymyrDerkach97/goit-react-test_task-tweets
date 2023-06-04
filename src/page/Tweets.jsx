@@ -1,18 +1,19 @@
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { fetchUsers } from "redux/operations";
+import { selectUsers } from "redux/selectors";
+import { fetchNumberUSersApi } from "service/usersApi";
+import { ButtonWrapperStyled, OptionsPageWrapper } from "./Tweets.styled";
+
 import BackLink from "components/BackLink/BackLink";
 import ButtonLoadMore from "components/Button/ButtonLoadMore";
 import { StatusFilter } from "components/StatusFilter/StatusFilter";
 import TweetsList from "components/TweetsList/TweetsList";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { loadMoreUsers } from "redux/operations";
-import { selectUsers } from "redux/selectors";
-import { fetchAllUsersApi } from "service/usersApi";
-import { OptionsPageWrapper } from "./Tweets.styled";
 
 const Tweets = () => {
-  const [page, setPage] = useState(2);
-  const [totalUsersApi, settTotalUsersApi] = useState(2);
+  const [page, setPage] = useState(1);
+  const [totalUsersApi, settTotalUsersApi] = useState(0);
 
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
@@ -21,10 +22,14 @@ const Tweets = () => {
   const backLink = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
+    dispatch(fetchUsers(page));
+  }, [dispatch, page]);
+
+  useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await fetchAllUsersApi();
-        settTotalUsersApi(res.data.length);
+        const res = await fetchNumberUSersApi();
+        settTotalUsersApi(res);
       } catch (error) {
         console.log(error.message);
       }
@@ -33,7 +38,6 @@ const Tweets = () => {
   }, []);
 
   const onLoadMore = () => {
-    dispatch(loadMoreUsers(page));
     setPage((prev) => prev + 1);
   };
 
@@ -50,10 +54,11 @@ const Tweets = () => {
         </BackLink>
       </IconContext.Provider> */}
       <TweetsList />
-      {totalUsersApi > users.length && (
-        <ButtonLoadMore onLoadMore={onLoadMore} />
-        // <button onClick={onLoadMore}>Load more</button>
-      )}
+      <ButtonWrapperStyled>
+        {totalUsersApi > users.length && (
+          <ButtonLoadMore onLoadMore={onLoadMore} />
+        )}
+      </ButtonWrapperStyled>
     </>
   );
 };

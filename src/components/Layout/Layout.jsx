@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
-import { HeaderStyled } from "./Layout.styled";
+import { HeaderStyled, MainStyled } from "./Layout.styled";
 
 const Layout = () => {
   return (
@@ -10,9 +10,9 @@ const Layout = () => {
         <Navigation />
       </HeaderStyled>
       <Suspense fallback={null}>
-        <main>
+        <MainStyled>
           <Outlet />
-        </main>
+        </MainStyled>
       </Suspense>
     </>
   );

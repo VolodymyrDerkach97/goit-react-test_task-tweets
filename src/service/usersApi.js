@@ -2,41 +2,20 @@ import axios from "axios";
 axios.defaults.baseURL = `https://6478f441362560649a2eb566.mockapi.io/users`;
 
 export const fetchUsersApi = async (page) => {
-  try {
-    const res = await axios.get("?limit=3&page=1");
-
-    return res;
-  } catch (error) {
-    console.log(error.message);
-  }
+  const res = await axios.get(`?limit=3&page=${page}`);
+  return res;
 };
 
-export const fetchAllUsersApi = async (page) => {
+export const fetchNumberUSersApi = async () => {
   try {
     const res = await axios.get();
-
-    return res;
+    return res.data.length;
   } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const loadMoreApi = async (page) => {
-  try {
-    const res = await axios.get(`?limit=3&page=${page}`);
-
-    return res;
-  } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
 export const changeFollowersApi = async ({ id, ...data }) => {
-  try {
-    const res = await axios.put(`/${id}`, data);
-
-    return res;
-  } catch (error) {
-    console.log(error.message);
-  }
+  const res = await axios.put(`/${id}`, data);
+  return res;
 };

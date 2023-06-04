@@ -5,11 +5,15 @@ import { changeCountFollowers } from "redux/operations";
 
 import {
   ActicleStyled,
+  AvatarStyled,
+  AvatarWrapperStyled,
   CountFollowingStyled,
   CountTweetsStyled,
   IconGoItStyled,
   ImgWrapperStyled,
+  StyledAvatar,
   StyledCircle,
+  StyledWrapper,
   TweetsDataWrapperStyled,
 } from "./TweetsItem.styled";
 import ButtonFollow from "components/Button/ButtonTweets";
@@ -46,12 +50,13 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
           height={22}
           style={{ fill: "red" }}
         />
+
         <img src={defImg} alt="" width={308} height={168} />
       </ImgWrapperStyled>
       <TweetsDataWrapperStyled>
-        <StyledCircle>
-          <img src={avatar} alt={user} width="80" height="80" />
-        </StyledCircle>
+        <AvatarWrapperStyled>
+          <AvatarStyled src={avatar} alt={user} />
+        </AvatarWrapperStyled>
 
         <CountTweetsStyled>{tweets} TWEETS</CountTweetsStyled>
         <CountFollowingStyled>{formattedNumber} FOLLOWERS</CountFollowingStyled>

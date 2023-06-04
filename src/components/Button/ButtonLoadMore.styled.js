@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonLoadMoreStyled = styled.button`
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
   padding: 8px 16px;
@@ -8,7 +9,7 @@ export const ButtonLoadMoreStyled = styled.button`
   background-color: #471ca9;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
+
   color: #fff;
   border: 0;
   text-decoration: none;

@@ -5,7 +5,7 @@ export const ActicleStyled = styled.article`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 380px;
+  width: 300px;
   height: 460px;
 
   background: linear-gradient(
@@ -17,6 +17,10 @@ export const ActicleStyled = styled.article`
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
   color: #ebd8ff;
+
+  @media screen and (min-width: 390px) {
+    width: 380px;
+  }
 `;
 
 export const ImgWrapperStyled = styled.div`
@@ -53,38 +57,36 @@ export const TweetsDataWrapperStyled = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-export const StyledCircle = styled.div`
+export const AvatarWrapperStyled = styled.div`
   position: absolute;
   top: -43px;
+  left: 50%;
   width: 80px;
   height: 80px;
-  overflow: hidden;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ebd8ff;
+  box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
+    inset 0px -2.19582px 4.39163px #ae7be3,
+    inset 0px 4.39163px 3.29372px #fbf8ff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+`;
 
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0px 4.39163px 4.39163px rgba(0, 0, 0, 0.06),
-      inset 0px -2.19582px 4.39163px #ae7be3,
-      inset 0px 4.39163px 3.29372px #fbf8ff;
-  }
-
-  ::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    border: 8px solid #ebd8ff;
-    border-radius: 50%;
-    box-sizing: border-box;
-    pointer-events: none;
-  }
+export const AvatarStyled = styled.img`
+  object-fit: cover;
+  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  color: white;
 `;
 
 export const CountTweetsStyled = styled.p`
