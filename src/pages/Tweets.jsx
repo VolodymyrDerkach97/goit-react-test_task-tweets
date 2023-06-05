@@ -1,38 +1,41 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { fetchUsers } from "redux/operations";
 import {
-  selectIsFollowing,
   selectStatusFilter,
   selectUsers,
   selectVisibleTweets,
 } from "redux/selectors";
+
 import { fetchNumberUSersApi } from "service/usersApi";
-import {
-  ButtonWrapperStyled,
-  FilterMessageStyled,
-  OptionsPageWrapper,
-} from "./Tweets.styled";
 
 import BackLink from "components/BackLink/BackLink";
 import ButtonLoadMore from "components/Buttons/ButtonLoadMore";
 import { StatusFilter } from "components/StatusFilter/StatusFilter";
 import TweetsList from "components/TweetsList/TweetsList";
 
+import {
+  ButtonWrapperStyled,
+  FilterMessageStyled,
+  OptionsPageWrapper,
+} from "./Tweets.styled";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IconContext } from "react-icons";
 
 const Tweets = () => {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [totalUsersApi, settTotalUsersApi] = useState(0);
 
   const dispatch = useDispatch();
+
   const users = useSelector(selectUsers);
 
   const visibleUsers = useSelector(selectVisibleTweets);
   const statusFilter = useSelector(selectStatusFilter);
-  const IsFollowingUsers = useSelector(selectIsFollowing);
+
+  const tweetsPerPage = 3;
 
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? "/");
@@ -42,12 +45,8 @@ const Tweets = () => {
   }, []);
 
   useEffect(() => {
-    if (users.length !== 0) {
-      return;
-    }
-
-    dispatch(fetchUsers(1));
-  }, [dispatch, users]);
+    dispatch(fetchUsers(page));
+  }, [dispatch, page]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -62,16 +61,15 @@ const Tweets = () => {
   }, []);
 
   const onLoadMore = () => {
-    dispatch(fetchUsers(page));
-    setPage((prev) => prev + 1);
+    setPage(Math.ceil(users.length / tweetsPerPage) + 1);
   };
-  console.log("visibleUsers.length", visibleUsers.length);
-  console.log("totalUsersApi", totalUsersApi);
-  console.log("IsFollowingUsers.length", IsFollowingUsers.length);
+
   const isNotFoundFilter = visibleUsers.length === 0;
+
   const visibleLoadMore =
     totalUsersApi > visibleUsers.length &&
     visibleUsers.length !== 0 &&
+    totalUsersApi !== users.length &&
     (statusFilter === "all" || statusFilter === "follow");
 
   return (

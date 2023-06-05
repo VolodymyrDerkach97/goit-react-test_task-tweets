@@ -24,14 +24,15 @@ const TweetsItem = ({ id, user, avatar, tweets, followers }) => {
   const dispatch = useDispatch();
 
   const isFollowingArray = useSelector(selectIsFollowing);
-  const isFollowing = isFollowingArray.includes(id);
+
+  const isFollowing = isFollowingArray.some((user) => user.id === id);
 
   const handleFollowing = () => {
     if (isFollowing) {
       dispatch(deleteFollowing(id));
       dispatch(changeCountFollowers({ id, followers: followers - 1 }));
     } else {
-      dispatch(addFollowing(id));
+      dispatch(addFollowing({ id, user, avatar, tweets, followers }));
       dispatch(changeCountFollowers({ id, followers: followers + 1 }));
     }
   };

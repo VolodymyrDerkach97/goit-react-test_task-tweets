@@ -13,7 +13,9 @@ export const usersSlice = createSlice({
       state.isFollowing.push(action.payload);
     },
     deleteFollowing(state, action) {
-      const index = state.isFollowing.findIndex((id) => id === action.payload);
+      const index = state.isFollowing.findIndex(
+        (user) => user.id === action.payload
+      );
       if (index !== -1) {
         state.isFollowing.splice(index, 1);
       }
@@ -26,7 +28,11 @@ export const usersSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = [...state.items, ...action.payload];
+        const newItems = action.payload.filter(
+          (item) =>
+            !state.items.some((existingItem) => existingItem.id === item.id)
+        );
+        state.items.push(...newItems);
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.isLoading = false;

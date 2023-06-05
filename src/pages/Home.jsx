@@ -6,7 +6,9 @@ const Home = () => {
   useEffect(() => {
     document.title = "Home";
   }, []);
+
   const location = useLocation();
+
   return (
     <HomeWrapperStyled>
       <h1>Home Page </h1>
