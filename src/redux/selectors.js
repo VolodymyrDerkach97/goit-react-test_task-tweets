@@ -16,8 +16,8 @@ export const selectVisibleTweets = createSelector(
   (users, statusFilter, isFollowing) => {
     switch (statusFilter) {
       case statusFilters.follow:
-        return users.filter((obj1) => {
-          return !isFollowing.some((obj2) => obj2.id === obj1.id);
+        return users.filter((user) => {
+          return !isFollowing.some((item) => item.id === user.id);
         });
       case statusFilters.following:
         return isFollowing;
