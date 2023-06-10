@@ -21,7 +21,7 @@ export const ButtonStyled = styled.button`
   border-radius: 10.3108px;
   cursor: pointer;
 
-  &:active {
+  &:active, &:hover{
     background-color: #c5f99e;
   }
 `;
